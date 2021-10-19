@@ -58,9 +58,10 @@ contract SDAOUpgradableToken is Initializable, ContextUpgradeable, IERC20Upgrade
         __ERC20_init_unchained(name_, symbol_);
     }
 
-    function __ERC20_init_unchained(string memory name_, string memory symbol_) internal initializer {
+    function __ERC20_init_unchained(string memory name_, string memory symbol_,uint256 memory totalSupply_ ) internal initializer {
         _name = name_;
         _symbol = symbol_;
+        _totalSupply = totalSupply_;
         _decimals = 18;
     }
 
@@ -222,45 +223,6 @@ contract SDAOUpgradableToken is Initializable, ContextUpgradeable, IERC20Upgrade
         emit Transfer(sender, recipient, amount);
     }
 
-    /** @dev Creates `amount` tokens and assigns them to `account`, increasing
-     * the total supply.
-     *
-     * Emits a {Transfer} event with `from` set to the zero address.
-     *
-     * Requirements:
-     *
-     * - `to` cannot be the zero address.
-     */
-    function _mint(address account, uint256 amount) internal virtual {
-        require(account != address(0), "ERC20: mint to the zero address");
-
-        _beforeTokenTransfer(address(0), account, amount);
-
-        _totalSupply = _totalSupply.add(amount);
-        _balances[account] = _balances[account].add(amount);
-        emit Transfer(address(0), account, amount);
-    }
-
-    /**
-     * @dev Destroys `amount` tokens from `account`, reducing the
-     * total supply.
-     *
-     * Emits a {Transfer} event with `to` set to the zero address.
-     *
-     * Requirements:
-     *
-     * - `account` cannot be the zero address.
-     * - `account` must have at least `amount` tokens.
-     */
-    function _burn(address account, uint256 amount) internal virtual {
-        require(account != address(0), "ERC20: burn from the zero address");
-
-        _beforeTokenTransfer(account, address(0), amount);
-
-        _balances[account] = _balances[account].sub(amount, "ERC20: burn amount exceeds balance");
-        _totalSupply = _totalSupply.sub(amount);
-        emit Transfer(account, address(0), amount);
-    }
 
     /**
      * @dev Sets `amount` as the allowance of `spender` over the `owner` s tokens.
