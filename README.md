@@ -1,4 +1,4 @@
-# sdaoreward-token-contracts
+# sdaoupgradable-token-contracts
 Includes token contracts, migrations, tests
 
 ### SDAOUpgradableToken
