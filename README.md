@@ -10,8 +10,10 @@ Includes token contracts, migrations, tests
 * SDAOUpgradableToken(Ropsten) : 
 
 ## Requirements
-* [Node.js](https://github.com/nodejs/node) (12+)
-* [Npm](https://www.npmjs.com/package/npm)
+
+follows flow from 
+
+https://www.npmjs.com/package/@openzeppelin/truffle-upgrades
 
 ## Install
 

@@ -89,7 +89,7 @@ module.exports = {
       network_id: "42" // Kovan network ID
     },
     ropsten: {
-        gasPrice: 50000000000,
+        gasPrice: 60000000000,
         provider: () => provider("https://ropsten.infura.io/v3/" + process.env.InfuraKey),
         network_id: "3", // ropsten network ID, 
     },
@@ -108,14 +108,14 @@ module.exports = {
   },
 
   // Set default mocha options here, use special reporters etc.
-  mocha: {
-    // timeout: 100000
-  },
+  // mocha: {
+  //    timeout: 10000000
+  // },
 
   // Configure your compilers
   compilers: {
     solc: {
-    version: "0.6.2",    // Fetch exact version from solc-bin (default: truffle's version)
+    version: "0.6.0",    // Fetch exact version from solc-bin (default: truffle's version)
     // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
     settings: {          // See the solidity docs for advice about optimization and evmVersion
         optimizer: {
