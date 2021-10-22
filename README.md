@@ -1,13 +1,13 @@
 # sdaoupgradable-token-contracts
 Includes token contracts, migrations, tests
 
-### SDAOUpgradableToken
-* ERC-20 upgradable implementation for SDAOUpgradableToken Token
+### SDAOUpgradeableToken
+* ERC-20 upgradable implementation for SDAOUpgradeableToken Token
 
 ## Deployed Contracts
-* SDAOUpgradableToken (Mainnet): 
-* SDAOUpgradableToken (Kovan): 
-* SDAOUpgradableToken(Ropsten) : 
+* SDAOUpgradeableToken (Mainnet): 
+* SDAOUpgradeableToken (Kovan): 
+* SDAOUpgradeableToken(Ropsten) : 
 
 ## Requirements
 
