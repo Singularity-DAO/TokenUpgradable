@@ -3,5 +3,4 @@ node_modules
 package-lock.json
 .openzeppelin
 installed_contracts
-migrations
 .env
