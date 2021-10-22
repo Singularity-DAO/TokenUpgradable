@@ -12,11 +12,11 @@ const mapDirs = {
 // source file relative to repo root => dest file relative to module root
 //                                or => key to extract from source file => dest file relative to module root
 const mapFiles = {
-    "contracts/SDAOUpgradableToken.sol":  "sol/SDAOUpgradableToken.sol",
-    "build/contracts/SDAOUpgradableToken.json": {
-        "abi": "abi/SDAOUpgradableToken.json",
-        "networks": "networks/SDAOUpgradableToken.json",
-        "bytecode": "bytecode/SDAOUpgradableToken.json"
+    "contracts/SDAOUpgradeableToken.sol":  "sol/SDAOUpgradeableToken.sol",
+    "build/contracts/SDAOUpgradeableToken.json": {
+        "abi": "abi/SDAOUpgradeableToken.json",
+        "networks": "networks/SDAOUpgradeableToken.json",
+        "bytecode": "bytecode/SDAOUpgradeableToken.json"
     },
     "README.md": "README.md",
     "LICENSE": "LICENSE"
