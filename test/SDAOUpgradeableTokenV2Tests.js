@@ -1,7 +1,7 @@
 "use strict";
 let BigNumber = require("bignumber.js");
 var  SDAOUpgradeableToken = artifacts.require("SDAOUpgradeableToken.sol");
-var  SDAOUpgradeableToken2 = artifacts.require("SDAOUpgradeableToken2.sol");
+var  SDAOUpgradeableTokenV2 = artifacts.require("SDAOUpgradeableTokenV2.sol");
 const { deployProxy, upgradeProxy } = require('@openzeppelin/truffle-upgrades');
 
 let Contract = require("@truffle/contract");
@@ -21,12 +21,13 @@ async function testErrorRevert(prom)
     assert(rezE >= 0, "Must generate error and error message must contain revert");
 }
   
-contract('SDAOUpgradeableToken2', function(accounts) {
+contract('SDAOUpgradeableTokenV2', function(accounts) {
 
     var sdaoUpgradeableToken;
     const decimals = 18;
     const tokenFactor = (new BigNumber(10)).pow(decimals);
     let initialSupply = (new BigNumber(1000000)).times(tokenFactor).toFixed();
+    let burnAmount = (new BigNumber(6000)).times(tokenFactor).toFixed();
     
     before(async () => 
         {
@@ -38,7 +39,7 @@ contract('SDAOUpgradeableToken2', function(accounts) {
 
             // upgrade the Proxy
 
-            sdaoUpgradeableToken = await upgradeProxy(sdaoUpgradeableToken_Old, SDAOUpgradeableToken2);
+            sdaoUpgradeableToken = await upgradeProxy(sdaoUpgradeableToken_Old, SDAOUpgradeableTokenV2);
 
         });
 
@@ -88,22 +89,19 @@ contract('SDAOUpgradeableToken2', function(accounts) {
 
     // ************************ Test Scenarios Starts From Here ********************************************
 
-    it("0. Initial Deployment Configuration - Decimals, Additional Mint", async function() 
+    it("0. Initial Deployment Configuration - Burn function", async function() 
     {
         // accounts[0] -> Contract Owner
 
-        // Try to call with additional mint with non owner - should fail
-        await testErrorRevert(sdaoUpgradeableToken.additionalMint(initialSupply, { from: accounts[1] }));
+        // Try to call Burn with non owner - should fail
+        await testErrorRevert(sdaoUpgradeableToken.burn(burnAmount, { from: accounts[1] }));
 
         // Call Upgraded contract to mint the additional tokens
-        await sdaoUpgradeableToken.additionalMint(initialSupply, { from: accounts[0] });
-
-        // Try calling to mint again should fail
-        await testErrorRevert(sdaoUpgradeableToken.additionalMint(initialSupply, { from: accounts[0] }));
+        await sdaoUpgradeableToken.burn(burnAmount, { from: accounts[0] });
 
         // Check for the total Supply
-        initialSupply = (new BigNumber(initialSupply)).times(2).toFixed();   // Tokens total supply should be doubled 
-        await getInitialSupplyAndVerify(initialSupply);
+        const updatedTotalSupply = (new BigNumber(initialSupply)).minus(burnAmount).toFixed();
+        await getInitialSupplyAndVerify(updatedTotalSupply);
 
         // Check for the Configured Decimals - Should be 18
         await getDecimalsAndVerify(18);

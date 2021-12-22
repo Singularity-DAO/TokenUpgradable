@@ -97,6 +97,13 @@ module.exports = {
       gasPrice: 60000000000,
       provider: () => provider("https://mainnet.infura.io/v3/" + process.env.InfuraKey),
       network_id: "1" // mainnet network ID
+    }, 
+    polygontestnet: {
+      provider: () => provider( `https://rpc-mumbai.maticvigil.com`),
+      network_id: 80001,
+      confirmations: 10,
+      timeoutBlocks: 1000,
+      skipDryRun: true
     },
 
   },

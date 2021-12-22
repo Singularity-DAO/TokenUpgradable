@@ -6,21 +6,19 @@ import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
-contract SDAOUpgradeableToken2 is Initializable, OwnableUpgradeable, ERC20Upgradeable {
+contract SDAOUpgradeableTokenV2 is Initializable, OwnableUpgradeable, ERC20Upgradeable {
     
-    bool v2upgrade;
-
     function initialize(string memory name, string memory symbol, uint256 initialSupply) public virtual initializer {
         __ERC20_init(name, symbol);
         __Ownable_init();
         _mint(_msgSender(), initialSupply);
     }
 
-    function additionalMint(uint256 newSupply) public onlyOwner {
+    function burn(uint256 amount) public onlyOwner {
 
-     	require (!v2upgrade,"already upgraded");
-        _mint(_msgSender(), newSupply);
-        v2upgrade = true;
+     	require (amount > 0,"Invalid amount");
+        _burn(_msgSender(), amount);
+        
     }
 
 }
